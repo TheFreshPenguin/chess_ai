@@ -1,0 +1,45 @@
+<!doctype html>
+<title>{% block title %}{% endblock %} - Chess AI</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<nav>
+  <h1>chess ai</h1>
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+    <div>
+        <table>
+            <tbody>
+                <th>-</th>
+                <th>a</th>
+                <th>b</th>
+                <th>c</th>
+                <th>d</th>
+                <th>e</th>
+                <th>f</th>
+                <th>g</th>
+                <th>h</th>
+
+                {% for i in chessboard %}
+
+                <tr>
+                    <th>{{ 9 - loop.index }} </th>
+                    {% for j in i %}
+                        <td>{{ j }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <p>
+        <a href="{{ url_for('reset_board') }}">reset</a> - make a move:
+    </p>
+        <ul>
+        {% for i in legal_moves %}
+            <li><a href="{{ url_for('chess_ai', move = i) }}">{{ i }}</a></li>
+
+        {% endfor %}
+        </ul>
+</section>
